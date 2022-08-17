@@ -22,7 +22,12 @@ const Index = () => {
   )
 }
 
-const BigList = ({ products }) => {
+// use of memo function here to memoizing/checking what is the value
+// e.g. if the values do not change, rerender for big list and single product do not change
+const BigList = React.memo(({ products }) => {
+  useEffect(() => {
+    console.log('big list called')
+  })
   return (
     <section className='products'>
       {products.map((product) => {
@@ -30,9 +35,12 @@ const BigList = ({ products }) => {
       })}
     </section>
   )
-}
+});
 
 const SingleProduct = ({ fields }) => {
+  useEffect(() => {
+    console.log('single product called')
+  })
   let { name, price } = fields
   price = price / 100
   const image = fields.image[0].url
